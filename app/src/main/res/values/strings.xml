@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">DHDesafio4</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_name">Name</string>
+    <string name="prompt_password">Password</string>
+    <string name="prompt_password_repeat">Password repeat</string>
+    <string name="action_sign_in">Create account</string>
+    <string name="action_log_in">Log in</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="starting_app_splash">Starting app splash</string>
+    <string name="login_remember">Remember</string>
+</resources>
