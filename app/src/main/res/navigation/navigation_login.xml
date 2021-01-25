@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation_login"
+    app:startDestination="@id/toLoginFragment">
+
+    <fragment
+        android:id="@+id/toLoginFragment"
+        android:name="com.example.dhdesafio4.ui.ToLoginFragment"
+        android:label="ToLoginFragment" />
+    <fragment
+        android:id="@+id/toSignInFragment"
+        android:name="com.example.dhdesafio4.ui.ToSignInFragment"
+        android:label="ToSignInFragment" />
+</navigation>
