@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import com.example.dhdesafio4.databinding.ActivitySplashBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class SplashActivity : AppCompatActivity() {
     private val binding: ActivitySplashBinding by lazy {
@@ -23,5 +24,6 @@ class SplashActivity : AppCompatActivity() {
 
             finish()
         }, 5000)
+
     }
 }
