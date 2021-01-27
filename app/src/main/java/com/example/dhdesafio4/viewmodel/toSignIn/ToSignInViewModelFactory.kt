@@ -6,6 +6,6 @@ import com.google.firebase.auth.FirebaseAuth
 
 class ToSignInViewModelFactory(val auth: FirebaseAuth) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return modelClass.getConstructor(auth::class.java).newInstance(auth)
+        return modelClass.getConstructor(FirebaseAuth::class.java).newInstance(auth)
     }
 }

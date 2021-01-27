@@ -57,12 +57,17 @@ class ToLoginFragment : Fragment() {
             }
 
 
-            viewModel.loginStatus.observe(viewLifecycleOwner, snackCreator::showSnackS)
+            viewModel.loginStatus.observe(viewLifecycleOwner) {
+                loading.llLoading.visibility = View.GONE
+                snackCreator.showSnackS(it)
+            }
+
             btnLogin.setOnClickListener {
+                loading.llLoading.visibility = View.VISIBLE
                 viewModel.login(User(
-                    tvEmail.editText.toString(),
-                    "",
-                    tvPsw.editText.toString()
+                        tvEmail.editText!!.text.toString(),
+                        "",
+                        tvPsw.editText!!.text.toString()
                 ))
             }
         }

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.dhdesafio4.data.User
 import com.example.dhdesafio4.databinding.FragmentSignInBinding
 import com.example.dhdesafio4.utils.behavior.OkAndErrorSnack
 import com.example.dhdesafio4.viewmodel.toSignIn.ToSignInViewModel
@@ -44,11 +45,21 @@ class ToSignInFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.run {
-            btnLogin.setOnClickListener {
-
+            viewModel.registerStatus.observe(viewLifecycleOwner) {
+                loading.llLoading.visibility = View.GONE
+                snackCreator.showSnackS(it)
             }
 
-
+            btnLogin.setOnClickListener {
+                loading.llLoading.visibility = View.VISIBLE
+                viewModel.register(User(
+                        tvEmail.editText!!.text.toString(),
+                        tvName.editText!!.text.toString(),
+                        tvPsw.editText!!.text.toString(),
+                ),
+                        tvPswRpt.editText!!.text.toString()
+                )
+            }
         }
     }
 
