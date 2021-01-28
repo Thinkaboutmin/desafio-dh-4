@@ -14,4 +14,10 @@
     <string name="login_failed">"Login failed"</string>
     <string name="starting_app_splash">Starting app splash</string>
     <string name="login_remember">Remember</string>
+    <string name="fbtn_add_games">Floating button to add games</string>
+    <string name="tv_no_game">No game was found</string>
+    <string name="btn_save_game">Save Game</string>
+    <string name="prompt_name">Name</string>
+    <string name="prompt_created_at">Created at</string>
+    <string name="prompt_description">Description</string>
 </resources>
