@@ -7,7 +7,8 @@
     android:layout_marginLeft="8dp"
     android:layout_marginTop="8dp"
     android:layout_marginEnd="8dp"
-    android:layout_marginRight="8dp">
+    android:layout_marginRight="8dp"
+    android:background="#EDEDED">
 
     <SearchView
         android:id="@+id/svGames"
@@ -17,9 +18,10 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvGames"
-        android:layout_marginTop="8dp"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,8 +36,8 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="16dp"
         android:clickable="true"
-        android:focusable="true"
         android:contentDescription="@string/fbtn_add_games"
+        android:focusable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_baseline_add_24" />
@@ -52,15 +54,15 @@
         app:layout_constraintTop_toBottomOf="@+id/svGames" />
 
     <ProgressBar
-        android:id="@+id/progressBar2"
+        android:id="@+id/pbGames"
         style="?android:attr/progressBarStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/rvGames"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.125"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/svGames"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
