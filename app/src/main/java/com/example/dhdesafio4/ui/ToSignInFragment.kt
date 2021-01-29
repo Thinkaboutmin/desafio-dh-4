@@ -1,5 +1,6 @@
 package com.example.dhdesafio4.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.dhdesafio4.data.User
 import com.example.dhdesafio4.databinding.FragmentSignInBinding
-import com.example.dhdesafio4.utils.behavior.OkAndErrorSnack
+import com.example.dhdesafio4.utils.behavior.snack.OkAndErrorSnack
 import com.example.dhdesafio4.viewmodel.toSignIn.ToSignInViewModel
 import com.example.dhdesafio4.viewmodel.toSignIn.ToSignInViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
@@ -47,7 +48,14 @@ class ToSignInFragment : Fragment() {
         binding.run {
             viewModel.registerStatus.observe(viewLifecycleOwner) {
                 loading.llLoading.visibility = View.GONE
-                snackCreator.showSnackS(it)
+
+                if (it.first) {
+                    val intent = Intent(requireContext() ,ContentActivity::class.java)
+                    startActivity(intent)
+                    requireActivity().finish()
+                } else {
+                    snackCreator.showSnackS(it)
+                }
             }
 
             btnLogin.setOnClickListener {

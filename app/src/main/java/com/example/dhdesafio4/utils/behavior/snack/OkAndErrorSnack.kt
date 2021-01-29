@@ -1,4 +1,4 @@
-package com.example.dhdesafio4.utils.behavior
+package com.example.dhdesafio4.utils.behavior.snack
 
 import android.content.Context
 import android.graphics.Color

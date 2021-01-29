@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation_content">
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation_content"
+    app:startDestination="@id/gamesFragment">
 
+    <fragment
+        android:id="@+id/gamesFragment"
+        android:name="com.example.dhdesafio4.ui.GamesFragment"
+        android:label="GamesFragment" >
+        <action
+            android:id="@+id/action_gamesFragment_to_gameDetailFragment"
+            app:destination="@id/gameDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameAddFragment"
+        android:name="com.example.dhdesafio4.ui.GameAddFragment"
+        android:label="GameAddFragment">
+        <argument
+            android:name="gameItem"
+            app:argType="com.example.dhdesafio4.data.GameItem"
+            app:nullable="true"
+            android:defaultValue="@null"/>
+        <argument
+            android:name="updateItem"
+            app:argType="boolean"
+            android:defaultValue="false"/>
+    </fragment>
+    <fragment
+        android:id="@+id/gameDetailFragment"
+        android:name="com.example.dhdesafio4.ui.GameDetailFragment"
+        android:label="GameDetailFragment">
+        <argument
+            android:name="gameItem"
+            app:argType="com.example.dhdesafio4.data.GameItem" />
+        <action
+            android:id="@+id/action_gameDetailFragment_to_gameAddFragment"
+            app:destination="@id/gameAddFragment" />
+    </fragment>
 </navigation>

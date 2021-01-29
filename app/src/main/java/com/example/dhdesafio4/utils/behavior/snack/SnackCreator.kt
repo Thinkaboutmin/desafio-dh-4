@@ -1,4 +1,4 @@
-package com.example.dhdesafio4.utils.behavior
+package com.example.dhdesafio4.utils.behavior.snack
 
 import com.google.android.material.snackbar.Snackbar
 
