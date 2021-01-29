@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dhdesafio4.R
 import com.example.dhdesafio4.data.GameItem
 import com.example.dhdesafio4.databinding.GameItemBinding
+import com.example.dhdesafio4.utils.behavior.setMargins
 import com.squareup.picasso.Picasso
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -27,9 +28,14 @@ class GamesAdapter(val gameItems: ArrayList<GameItem>, val holderClick: ViewHold
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val gameItem = gameItems[position]
         Picasso.get().load(gameItem.imageURI).into(holder.binding.imgCard)
-        val formatter = SimpleDateFormat("yyyy", Locale.UK)
-        holder.binding.tvCardContent.text = formatter.format(gameItem.createdAt)
+        holder.binding.tvCardContent.text = gameItem.createdAt
         holder.binding.tvCardTitulo.text = gameItem.name
+
+        if (position % 2 == 0) {
+            setMargins(holder.binding.root, 0, 0, 16, 16)
+        } else {
+            setMargins(holder.binding.root, 16, 0, 0, 16)
+        }
     }
 
     override fun getItemCount(): Int = gameItems.size

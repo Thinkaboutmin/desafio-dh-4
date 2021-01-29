@@ -1,11 +1,12 @@
 package com.example.dhdesafio4.data
 
-import android.net.Uri
-import java.time.LocalDateTime
+import com.google.firebase.database.Exclude
+import java.io.Serializable
 
 data class GameItem(
-        val name: String,
-        val createdAt: LocalDateTime,
-        val description: String,
-        val imageURI: Uri
-)
+        var name: String = "",
+        var createdAt: String = "",
+        var description: String = "",
+        var imageURI: String = "",
+        @get:Exclude val uid: String = ""
+) : Serializable
