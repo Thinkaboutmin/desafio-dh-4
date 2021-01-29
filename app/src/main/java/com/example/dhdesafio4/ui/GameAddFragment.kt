@@ -119,6 +119,7 @@ class GameAddFragment : Fragment() {
                 Picasso.get().load(args.gameItem!!.imageURI).into(iconSelector)
                 setMargins(iconSelector, 0, 0, 0, 0)
                 iconSelector.scaleType = ImageView.ScaleType.CENTER_CROP
+                viewModel.imageUri = args.gameItem!!.imageURI
             }
         }
     }
