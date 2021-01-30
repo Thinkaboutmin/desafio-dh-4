@@ -57,6 +57,9 @@ class GameAddViewModel(private val fStorage: FirebaseStorage, private val fAuth:
         validations(gameItem)
         generateRefs(gameItem)
 
+        databaseRef = databaseRef!!.push()
+        storageRef = storageRef!!.child(databaseRef!!.key!!)
+
         storageRef!!.putFile(Uri.parse(gameItem.imageURI)).addOnSuccessListener {
             val newGameItem = GameItem(
                 gameItem.name,
@@ -65,7 +68,7 @@ class GameAddViewModel(private val fStorage: FirebaseStorage, private val fAuth:
                 storageRef!!.path
             )
 
-            databaseRef!!.push().setValue(newGameItem).addOnSuccessListener {
+            databaseRef!!.setValue(newGameItem).addOnSuccessListener {
                 gameCreateStatus.value = Pair(true, "Jogo foi criado com sucesso")
             }.addOnCanceledListener {
                 gameCreateStatus.value = Pair(false, "Criação do jogo foi cancelada")
@@ -93,7 +96,7 @@ class GameAddViewModel(private val fStorage: FirebaseStorage, private val fAuth:
         validations(gameItem)
         generateRefs(gameItem)
 
-        if (gameItem.imageURI.matches(Regex("file://*"))) {
+        if (gameItem.imageURI.matches(Regex("content://.*"))) {
             storageRef!!.putFile(Uri.parse(gameItem.imageURI)).addOnSuccessListener {
                 val newGameItem = GameItem(
                     gameItem.name,
@@ -128,6 +131,8 @@ class GameAddViewModel(private val fStorage: FirebaseStorage, private val fAuth:
             return
         }
 
+        // Coloca o caminho de forma manual do firebase
+        gameItem.imageURI = "${fAuth.uid}/games/${gameItem.uid}"
         databaseRef!!.child(gameItem.uid).setValue(gameItem).addOnSuccessListener {
             gameCreateStatus.value = Pair(true, "Jogo foi atualizado com sucesso")
         }.addOnCanceledListener {
@@ -158,7 +163,12 @@ class GameAddViewModel(private val fStorage: FirebaseStorage, private val fAuth:
 
     private fun generateRefs(gameItem: GameItem) {
         if (storageRef == null) {
-            storageRef = fReferenceMaker.storageReference(fStorage.reference).child(gameItem.name)
+            if (gameItem.uid.isEmpty() || gameItem.uid.isBlank()) {
+                storageRef = fReferenceMaker.storageReference(fStorage.reference)
+            } else {
+                storageRef = fReferenceMaker.storageReference(fStorage.reference).child(gameItem.uid)
+            }
+
         }
 
         if (databaseRef == null) {

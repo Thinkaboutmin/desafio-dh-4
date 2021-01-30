@@ -8,10 +8,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.dhdesafio4.R
+import com.example.dhdesafio4.data.GameItem
 import com.example.dhdesafio4.databinding.GameItemDetailsBinding
+import com.example.dhdesafio4.viewmodel.game.GameViewModelFactory
+import com.example.dhdesafio4.viewmodel.game.details.GameDetailsViewModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
 import java.lang.Exception
@@ -23,6 +30,14 @@ class GameDetailFragment : Fragment() {
 
     private val args: GameDetailFragmentArgs  by navArgs()
 
+    private val viewModel: GameDetailsViewModel by viewModels {
+        GameViewModelFactory(
+            FirebaseStorage.getInstance(),
+            FirebaseAuth.getInstance(),
+            FirebaseDatabase.getInstance()
+        )
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         _binding = GameItemDetailsBinding.inflate(inflater, container, false)
@@ -33,8 +48,32 @@ class GameDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.followChanges(args.gameItem)
+
+        viewModel.gameItemChanges.observe(viewLifecycleOwner) { gameItem ->
+            setViewData(gameItem)
+        }
+
         binding.run {
             val gameItem = args.gameItem
+            setViewData(gameItem)
+            toolbar.setNavigationOnClickListener {
+                findNavController().popBackStack()
+            }
+
+            fbEdit.setOnClickListener {
+                val action =
+                    GameDetailFragmentDirections.actionGameDetailFragmentToGameAddFragment(
+                        gameItem,
+                        true
+                    )
+                findNavController().navigate(action)
+            }
+        }
+    }
+
+    private fun setViewData(gameItem: GameItem) {
+        binding.run {
             tvContent.text = gameItem.description
             tvCreated.text = getString(R.string.created_at, gameItem.createdAt)
             tvTitle.text = gameItem.name
@@ -52,18 +91,6 @@ class GameDetailFragment : Fragment() {
 
                 }
             })
-            toolbar.setNavigationOnClickListener {
-                findNavController().popBackStack()
-            }
-
-            fbEdit.setOnClickListener {
-                val action =
-                    GameDetailFragmentDirections.actionGameDetailFragmentToGameAddFragment(
-                        gameItem,
-                        true
-                    )
-                findNavController().navigate(action)
-            }
         }
     }
 
