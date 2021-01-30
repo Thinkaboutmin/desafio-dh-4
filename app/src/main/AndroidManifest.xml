@@ -10,15 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DHDesafio4">
         <activity android:name=".ui.ContentActivity"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
+            android:theme="@style/Theme.DHDesafio4"
             android:windowSoftInputMode="stateVisible|adjustResize"/>
         <activity
             android:name=".ui.LoginActivity"
             android:windowSoftInputMode="stateVisible|adjustResize"
             android:label="@string/title_activity_login"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+            android:theme="@style/Theme.DHDesafio4" />
         <activity android:name=".ui.SplashActivity"
-                  android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
+                  android:theme="@style/Theme.DHDesafio4">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

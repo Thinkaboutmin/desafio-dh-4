@@ -64,6 +64,12 @@
                             android:inputType="textPassword" />
                     </com.google.android.material.textfield.TextInputLayout>
 
+                    <CheckBox
+                        android:id="@+id/checkBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/login_remember" />
+
                     <Button
                         android:id="@+id/btnLogin"
                         android:layout_width="match_parent"
@@ -71,19 +77,14 @@
                         android:layout_marginTop="20dp"
                         android:text="@string/action_log_in" />
 
-                    <CheckBox
-                        android:id="@+id/checkBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/login_remember" />
-
                     <TextView
                         android:id="@+id/btnSignIn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:gravity="center"
-                        android:text="@string/action_sign_in" />
+                        android:text="@string/action_sign_in"
+                        android:textColor="@color/blue_200" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>

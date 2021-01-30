@@ -39,7 +39,7 @@
                 android:layout_marginTop="4dp"
                 android:textAllCaps="true"
                 android:textColor="#1D1C1C"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
