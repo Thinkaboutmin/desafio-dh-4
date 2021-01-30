@@ -1,5 +1,7 @@
 package com.example.dhdesafio4.viewmodel.game.list
 
+import android.os.Handler
+import android.os.Looper
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.dhdesafio4.data.GameItem
@@ -27,6 +29,8 @@ class GameViewModel(private val fStorage: FirebaseStorage, private val fAuth: Fi
             fAuth
         )
     }
+
+    private var gotData: Boolean = false
 
     private var databaseRef: DatabaseReference? = null
 
@@ -71,6 +75,8 @@ class GameViewModel(private val fStorage: FirebaseStorage, private val fAuth: Fi
                 }
 
                 private fun newData(snapshot: DataSnapshot) {
+                    gotData = true
+
                     val data =
                         snapshot.getValue(
                             GameItem::class.java
@@ -102,6 +108,7 @@ class GameViewModel(private val fStorage: FirebaseStorage, private val fAuth: Fi
                 }
 
                 private fun dataUpdated(snapshot: DataSnapshot, removed: Boolean) {
+                    gotData = true
                     val data =
                         snapshot.getValue(
                             GameItem::class.java
@@ -145,5 +152,11 @@ class GameViewModel(private val fStorage: FirebaseStorage, private val fAuth: Fi
             databaseRef!!.addChildEventListener(childrenListener!!)
         }
 
+        val handle = Handler(Looper.getMainLooper())
+        handle.postDelayed({
+            if (!gotData) {
+                gameList.value = Collections.synchronizedList(mutableListOf())
+            }
+        }, 10000)
     }
 }
